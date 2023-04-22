@@ -11,7 +11,9 @@ import { ExceptionFilter } from './errors/exception.filter';
 import { UsersController } from './users/users.controller';
 import { App } from './app';
 import { ExceptionFilterInterface } from './errors/exceptionFilter.interface';
-import UsersControllerInterface from './users/usesController.interface';
+import UsersControllerInterface from './users/users.controller.interface';
+import UsersServiceInterface from './users/users.service.interface';
+import { UsersService } from './users/users.service';
 
 // async function bootstrap() {
 //   const logger = new LoggerService();
@@ -29,10 +31,12 @@ import UsersControllerInterface from './users/usesController.interface';
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<App>(TYPES.Application).to(App);
   bind<LoggerInterface>(TYPES.LoggerInterface).to(LoggerService);
+
   // It is not necessary to create an interface for everything. If we sure we have only one realisaton
   // of service, we can use it instead of an interface for binding.
-  bind<ExceptionFilterInterface>(TYPES.ExceptionFilterInterface).to(ExceptionFilter);
-  bind<UsersControllerInterface>(TYPES.UsersControllerInterface).to(UsersController);
+  bind<ExceptionFilterInterface>(TYPES.ExceptionFilter).to(ExceptionFilter);
+  bind<UsersControllerInterface>(TYPES.UsersController).to(UsersController);
+  bind<UsersServiceInterface>(TYPES.UsersService).to(UsersService);
 });
 
 interface BootstrapInterface {

@@ -1,6 +1,7 @@
 export const TYPES = {
   Application: Symbol.for('Application'),
   LoggerInterface: Symbol.for('LoggerInterface'),
-  UsersControllerInterface: Symbol.for('UsersControllerInterface'),
-  ExceptionFilterInterface: Symbol.for('ExceptionFilterInterface'),
+  UsersController: Symbol.for('UsersController'),
+  UsersService: Symbol.for('UsersService'),
+  ExceptionFilter: Symbol.for('ExceptionFilter'),
 };
