@@ -32,10 +32,12 @@ let BaseController = class BaseController {
         return res.status(201);
     }
     bindRoutes(routes) {
-        for (const { method, path, func } of routes) {
+        for (const { method, path, func, middlewares } of routes) {
             this._logger.log(`[${method}: ${path}]`);
+            const middleware = middlewares === null || middlewares === void 0 ? void 0 : middlewares.map((m) => m.execute.bind(m));
             const handler = func.bind(this);
-            this.router[method](path, handler);
+            const pipeline = (middleware === null || middleware === void 0 ? void 0 : middleware.length) ? [...middleware, handler] : handler;
+            this.router[method](path, pipeline);
         }
     }
 };

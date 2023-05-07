@@ -35,7 +35,6 @@ export abstract class BaseController {
 
       const middleware = middlewares?.map((m) => m.execute.bind(m));
       const handler = func.bind(this);
-
       const pipeline = middleware?.length ? [...middleware, handler] : handler;
 
       this.router[method](path, pipeline);

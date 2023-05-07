@@ -65,8 +65,8 @@ let App = class App {
 App = __decorate([
     (0, inversify_1.injectable)(),
     __param(0, (0, inversify_1.inject)(types_1.TYPES.LoggerInterface)),
-    __param(1, (0, inversify_1.inject)(types_1.TYPES.UsersControllerInterface)),
-    __param(2, (0, inversify_1.inject)(types_1.TYPES.ExceptionFilterInterface)),
+    __param(1, (0, inversify_1.inject)(types_1.TYPES.UsersController)),
+    __param(2, (0, inversify_1.inject)(types_1.TYPES.ExceptionFilter)),
     __metadata("design:paramtypes", [Object, users_controller_1.UsersController, Object])
 ], App);
 exports.App = App;

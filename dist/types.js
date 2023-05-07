@@ -4,7 +4,9 @@ exports.TYPES = void 0;
 exports.TYPES = {
     Application: Symbol.for('Application'),
     LoggerInterface: Symbol.for('LoggerInterface'),
-    UsersControllerInterface: Symbol.for('UsersControllerInterface'),
-    ExceptionFilterInterface: Symbol.for('ExceptionFilterInterface'),
+    UsersController: Symbol.for('UsersController'),
+    UsersService: Symbol.for('UsersService'),
+    ConfigService: Symbol.for('ConfigService'),
+    ExceptionFilter: Symbol.for('ExceptionFilter'),
 };
 //# sourceMappingURL=types.js.map

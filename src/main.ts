@@ -14,6 +14,8 @@ import { ExceptionFilterInterface } from './errors/exceptionFilter.interface';
 import UsersControllerInterface from './users/users.controller.interface';
 import UsersServiceInterface from './users/users.service.interface';
 import { UsersService } from './users/users.service';
+import ConfigService from './config/config.service';
+import ConfigServiceInterface from './config/config.service.interface';
 
 // async function bootstrap() {
 //   const logger = new LoggerService();
@@ -30,13 +32,20 @@ import { UsersService } from './users/users.service';
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<App>(TYPES.Application).to(App);
-  bind<LoggerInterface>(TYPES.LoggerInterface).to(LoggerService);
+  bind<LoggerInterface>(TYPES.LoggerInterface).to(LoggerService).inSingletonScope();
 
   // It is not necessary to create an interface for everything. If we sure we have only one realisaton
   // of service, we can use it instead of an interface for binding.
   bind<ExceptionFilterInterface>(TYPES.ExceptionFilter).to(ExceptionFilter);
   bind<UsersControllerInterface>(TYPES.UsersController).to(UsersController);
-  bind<UsersServiceInterface>(TYPES.UsersService).to(UsersService);
+
+  // Common way of binding is SCOPED - one request = one service
+  // bind<UsersServiceInterface>(TYPES.UsersService).to(UsersService);
+  // As singleton many requests = one service
+  bind<UsersServiceInterface>(TYPES.UsersService).to(UsersService).inSingletonScope();
+  // As transient one request = many services
+  // bind<UsersServiceInterface>(TYPES.UsersService).to(UsersService).inTransientScope();
+  bind<ConfigServiceInterface>(TYPES.ConfigService).to(ConfigService);
 });
 
 interface BootstrapInterface {
