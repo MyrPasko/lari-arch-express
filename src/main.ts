@@ -16,6 +16,7 @@ import UsersServiceInterface from './users/users.service.interface';
 import { UsersService } from './users/users.service';
 import ConfigService from './config/config.service';
 import ConfigServiceInterface from './config/config.service.interface';
+import { PrismaService } from './database/prisma.service';
 
 // async function bootstrap() {
 //   const logger = new LoggerService();
@@ -46,6 +47,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   // As transient one request = many services
   // bind<UsersServiceInterface>(TYPES.UsersService).to(UsersService).inTransientScope();
   bind<ConfigServiceInterface>(TYPES.ConfigService).to(ConfigService);
+  bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
 });
 
 interface BootstrapInterface {

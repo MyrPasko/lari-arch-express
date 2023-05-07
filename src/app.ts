@@ -6,6 +6,7 @@ import { TYPES } from './types';
 import 'reflect-metadata';
 import { UsersController } from './users/users.controller';
 import { json } from 'body-parser';
+import { PrismaService } from './database/prisma.service';
 
 @injectable()
 export class App {
@@ -19,6 +20,7 @@ export class App {
     public usersController: UsersController,
     @inject(TYPES.ExceptionFilter)
     public exceptionFilter: ExceptionFilterInterface,
+    @inject(TYPES.PrismaService) public prismaService: PrismaService,
   ) {
     this.app = express();
     this.port = 8000;
@@ -43,6 +45,7 @@ export class App {
     this.useMiddleware();
     this.useRoutes();
     this.useExceptionFilters();
+    await this.prismaService.connect();
     this.app.listen(this.port);
     this.logger.log(`[Server is running on http://localhost:${this.port}]`);
   }
